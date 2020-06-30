@@ -3,3 +3,6 @@ export {linkBackground}
 
 const linkLogo = "https://wikimarketing.vn/wp-content/uploads/2018/12/tu-tao-logo.png"
 export {linkLogo}
+
+const linkForgotPass = "https://google.com"
+export {linkForgotPass}

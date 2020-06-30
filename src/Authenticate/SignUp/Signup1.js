@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     container:{
         justifyContent:"center",
         height: Dimensions.get("window").height,
-        backgroundColor:"red",
         overflow:"scroll"
 
     },

@@ -1,62 +1,43 @@
 import React, { Component } from "react";
-import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, Linking  } from "react-native";
 import TextField from "../../Common/TextField";
-import { linkBackground } from "../../Global/string";
+import { linkForgotPass } from "../../Global/string";
 import Logo from "../../Common/Logo";
 import ButtonFormat from "../../Common/Button";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.TouchInside = this.TouchInside.bind(this)
-
+    this.TouchSignup = this.TouchSignup.bind(this);
+    this.TouchLogin = this.TouchLogin.bind(this);
   }
-  TouchInside(){
+  TouchSignup() {
     this.props.navigation.navigate("Signup1");
-  };
+  }
+  TouchLogin() {
+    this.props.navigation.navigate("Home");
+  }
 
   render() {
-    
-
     return (
       <View style={styles.container}>
         <Logo></Logo>
-        <TextField placeholder={this.props.test}></TextField>
+        <TextField placeholder={" Email"}></TextField>
         <TextField placeholder={" Mật khẩu"} pass={true}></TextField>
-        <ButtonFormat content={"ĐĂNG NHẬP"}></ButtonFormat>
+        <ButtonFormat
+          content={"ĐĂNG NHẬP"}
+          TouchInside={this.TouchLogin}
+        ></ButtonFormat>
         <ButtonFormat
           content={"ĐĂNG KÝ"}
-          TouchInside={this.TouchInside}
+          TouchInside={this.TouchSignup}
         ></ButtonFormat>
-        <TouchableOpacity style={styles.touch}>
+        <TouchableOpacity style={styles.touch} onPress={ ()=>{ Linking.openURL(linkForgotPass)}}>
           <Text style={styles.underline}>Quên mật khẩu?</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
-
-// const Login = (props) => {
-//   const TouchInside = () => {
-//     props.navigation.navigate("Signup1");
-//   };
-//   return (
-//     <View>
-//       <Logo></Logo>
-//       <TextField placeholder={props.test}></TextField>
-//       <TextField placeholder={" Mật khẩu"} pass={true}></TextField>
-//       <ButtonFormat content={"ĐĂNG NHẬP"}></ButtonFormat>
-//       <ButtonFormat
-//         content={"ĐĂNG KÝ"}
-//         TouchInside={TouchInside}
-//       ></ButtonFormat>
-//       <TouchableOpacity style={styles.touch}>
-//         <Text style={styles.underline}>Quên mật khẩu?</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
-// export default Login;
 
 const styles = StyleSheet.create({
   container: {

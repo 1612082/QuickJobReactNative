@@ -17,6 +17,8 @@ export default class Signup3 extends Component {
 const styles = StyleSheet.create({
     container:{
         justifyContent:"center",
-        height: Dimensions.get("window").height,
+        // height: Dimensions.get("window").height,
+        overflow:"scroll",
+        flex:1
     }
 });

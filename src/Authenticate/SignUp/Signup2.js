@@ -18,7 +18,7 @@ export default class Signup2 extends Component {
         <Text style={{marginTop:40, margin:20, fontSize:20, fontWeight: "bold", textAlign:"center"}}>Bạn không bắt buộc phải điền các mục dưới đây nhưng nếu điền chúng bạn sẽ có cơ hội nhận dược việc cao hơn</Text>        
         <Text style={styles.text}>Ngày sinh</Text>
         <DatePicker
-          style={{ width: 200, marginTop: 10, marginLeft: "5%", width:350 }}
+          style={{ width: 200, marginTop: 10, marginLeft: "5%", width:300 }}
           date={this.state.date}
           mode="date"
           placeholder="select date"
