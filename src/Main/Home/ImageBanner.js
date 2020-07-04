@@ -16,7 +16,7 @@ export default function ImageBanner(props) {
   };
   return (
     <View style={styles.item}>
-      <TouchableOpacity onPress={openLink(props.item.link)}>
+      <TouchableOpacity onPress={() => openLink(props.item.link)}>
         <Image
           style={styles.img}
           source={{

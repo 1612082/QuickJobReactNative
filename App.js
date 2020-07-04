@@ -13,6 +13,7 @@ import Signup1 from "./src/Authenticate/SignUp/Signup1";
 import Signup2 from "./src/Authenticate/SignUp/Signup2";
 import Signup3 from "./src/Authenticate/SignUp/Signup3";
 
+
 import Home from "./src/Main/Home/Home";
 import Search from "./src/Main/Search/Search";
 import Chat from "./src/Main/Chat/Chat";

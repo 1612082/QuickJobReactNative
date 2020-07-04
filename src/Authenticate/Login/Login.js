@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, TouchableOpacity, Linking  } from "react-native";
+
 import TextField from "../../Common/TextField";
 import { linkForgotPass } from "../../Global/string";
 import Logo from "../../Common/Logo";
 import ButtonFormat from "../../Common/Button";
+
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
