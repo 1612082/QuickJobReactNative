@@ -2,28 +2,30 @@ import React, { Component } from "react";
 import { Text, StyleSheet, View, ScrollView, SectionList } from "react-native";
 import ImageBanner from "./ImageBanner";
 import JobCell from "../../Common/JobCell/JobCell"
+import SyncStorage from "sync-storage";
+
 const DATA = [
   {
     title: "Top 5 công việc thời vụ",
     data: [
-        {
-            title: "alibaba",
-            addr:"30b con tê tê",
-            salary:"10000VND",
-            category:"thời vụ"
-        }
+      {
+        title: "alibaba",
+        addr: "30b con tê tê",
+        salary: "10000VND",
+        category: "thời vụ"
+      }
     ],
   },
   {
     title: "Top 5 công việc giao sản phẩm",
     data: [{
-        title: "alibaba",
-        addr:"30b con tê tê",
-        salary:"10000VND",
-        category:"sản phẩm"
+      title: "alibaba",
+      addr: "30b con tê tê",
+      salary: "10000VND",
+      category: "sản phẩm"
     }],
   },
-  
+
 ];
 
 export default class Home extends Component {
@@ -44,6 +46,15 @@ export default class Home extends Component {
       },
     ];
     this.renderBannerItem = this.renderBannerItem.bind(this);
+    const retrievedItem = SyncStorage.get('token');
+    console.log("hahaha", retrievedItem);
+    if (retrievedItem !== null) {
+      const item = JSON.parse(retrievedItem);
+      console.log(item);
+      const authorization = `Bearer ${item}`;
+      // We have data!!
+      console.log(authorization);
+    }
   }
 
   renderBannerItem(listBanner) {

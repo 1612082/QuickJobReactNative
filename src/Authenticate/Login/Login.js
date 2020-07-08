@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import AsyncStorage from '@react-native-community/async-storage';
-import { Text, StyleSheet, View, TouchableOpacity, Linking, KeyboardAvoidingView } from "react-native";
+import SyncStorage from "sync-storage";
+import { Text, StyleSheet, View, TouchableOpacity, Linking, KeyboardAvoidingView, Alert } from "react-native";
 
 import TextField from "../../Common/TextField";
 import { linkForgotPass } from "../../Global/string";
 import Logo from "../../Common/Logo";
 import ButtonFormat from "../../Common/Button";
-import loginRequest from "../../apiAuth/tokenClient";
+import axios from "../../ultis/axios.default"
 
 export default class Login extends Component {
   constructor(props) {
@@ -22,9 +22,8 @@ export default class Login extends Component {
     this.props.navigation.navigate("Signup1");
   }
   TouchLogin() {
-    const client = loginRequest;
-    client
-      .post('/login', {
+    axios
+      .post('http://192.168.100.4:8000/login', {
         email: this.state.email,
         password: this.state.password
       })
@@ -34,8 +33,8 @@ export default class Login extends Component {
           Alert.alert(res.data.message);
         } else {
           // thành công
-          AsyncStorage.setItem("token", JSON.stringify(res.data.data.token));
-          AsyncStorage.setItem("email", email);
+          SyncStorage.set("token", JSON.stringify(res.data.data.token));
+          SyncStorage.set("user", JSON.stringify(res.data.data.user));
           this.props.navigation.navigate("Home");
           // lấy thông tin user
           // getUserInfo().then(res => {

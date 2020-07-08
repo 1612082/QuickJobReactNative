@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import { apiConfig } from '../config/config';
-const getAccessToken = async () => {
+import SyncStorage from 'sync-storage';
+const getAccessToken = () => {
     try {
-        const retrievedItem = await AsyncStorage.getItem('tokenData');
+        const retrievedItem = SyncStorage.get('tokem');
         if (retrievedItem !== null) {
             const item = JSON.parse(retrievedItem);
             console.log(item);
-            const authorization = `Bearer ${item.token}`;
+            const authorization = `Bearer ${item}`;
             // We have data!!
             return authorization;
         } return null;
@@ -17,13 +16,13 @@ const getAccessToken = async () => {
     }
 };
 const loginClient = axios.create({
-    baseURL: apiConfig.baseUrl,
+    baseURL: "http://192.168.100.4:8000/",
     headers: {
         Accept: 'application/json',
     },
 });
-const getLoginClient = async () => {
-    loginClient.defaults.headers.common.Authorization = await getAccessToken();
+const getLoginClient = () => {
+    loginClient.defaults.headers.common.Authorization = getAccessToken();
     return loginClient;
 };
 export default getLoginClient;
@@ -41,14 +40,14 @@ loginClient.interceptors.request.use(
     }, error => Promise.reject(error));
 // Intercept all responses
 loginClient.interceptors.response.use(
-    async response => {
+    response => {
         if (response.status === 401) {
             try {
-                const value = await AsyncStorage.getItem('tokenData');
+                const value = SyncStorage.get('tokenData');
                 if (value !== null) {
                     // We have data!!
-                    AsyncStorage.clear();
-                    NavigationService.navigate('AuthStackScreen');
+                    SyncStorage.clear();
+                    NavigationService.navigate('Home');
                 }
             } catch (error) {
                 // Error retrieving data

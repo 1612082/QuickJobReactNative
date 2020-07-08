@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { apiConfig } from '../config/config';
 const client = axios.create({
-    baseURL: apiConfig.baseUrl,
+    baseURL: "http://192.168.100.4:8000/",
     headers: {
         Accept: 'application/json',
     },
@@ -35,9 +34,5 @@ client.interceptors.response.use(
         return response;
     },
     error => {
-        console.log(
-            `%c ${error.response.status} - ${getUrl(error.response.config)}:`,
-            'color: #a71d5d; font-weight: bold',
-            error.response,
-        ); return Promise.reject(error);
+        return Promise.reject(error);
     });
