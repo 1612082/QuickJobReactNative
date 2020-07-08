@@ -23,7 +23,7 @@ export default class Login extends Component {
   }
   TouchLogin() {
     axios
-      .post('http://192.168.100.4:8000/login', {
+      .post('login', {
         email: this.state.email,
         password: this.state.password
       })
