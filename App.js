@@ -6,12 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Login from "./src/Authenticate/Login/Login";
+import Signup from "./src/Authenticate/SignUp/Signup";
 
 import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
 
-import Signup1 from "./src/Authenticate/SignUp/Signup1";
-import Signup2 from "./src/Authenticate/SignUp/Signup2";
-import Signup3 from "./src/Authenticate/SignUp/Signup3";
+// import Signup1 from "./src/Authenticate/SignUp/Signup1";
+// import Signup2 from "./src/Authenticate/SignUp/Signup2";
+// import Signup3 from "./src/Authenticate/SignUp/Signup3";
 
 
 import Home from "./src/Main/Home/Home";
@@ -19,6 +20,7 @@ import Search from "./src/Main/Search/Search";
 import Chat from "./src/Main/Chat/Chat";
 import Manage from "./src/Main/Manage/Manage";
 import Profile from "./src/Main/Profile/Profile";
+import SyncStorage from "sync-storage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,16 +32,19 @@ const MainTab = (props) => {
           source={require('./assets/noti.png')}
           style={styles.ImageIconStyle}
         />
-        
+
       </TouchableOpacity>
     ),
     headerLeft: () => (
-      <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5} onPress={() => props.navigation.navigate("Login")}>
+      <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5} onPress={() => {
+        props.navigation.navigate("Login");
+        SyncStorage.getAllKeys().map(k => SyncStorage.remove(k));
+      }}>
         <Image
           source={require("./assets/logout.png")}
           style={styles.ImageIconStyle}
         />
-        
+
       </TouchableOpacity>
     ),
   });
@@ -82,38 +87,38 @@ const MainTab = (props) => {
 };
 const SignUpStack = createStackNavigator();
 
-function SignUpStackScreen() {
-  return (
-    <SignUpStack.Navigator>
-      <SignUpStack.Screen
-          name="Signup1"
-          component={Signup1}
-          options={{ title: "SignUp", headerTitleAlign: "center" }}
-        />
-        <SignUpStack.Screen
-          name="Signup2"
-          component={Signup2}
-          options={{ title: "SignUp", headerTitleAlign: "center" }}
-        />
-        <SignUpStack.Screen
-          name="Signup3"
-          component={Signup3}
-          options={{ title: "SignUp", headerTitleAlign: "center" }}
-        />
-    </SignUpStack.Navigator>
-  );
-}
+// function SignUpStackScreen() {
+//   return (
+//     <SignUpStack.Navigator>
+//       <SignUpStack.Screen
+//         name="Signup1"
+//         component={Signup1}
+//         options={{ title: "SignUp", headerTitleAlign: "center" }}
+//       />
+//       <SignUpStack.Screen
+//         name="Signup2"
+//         component={Signup2}
+//         options={{ title: "SignUp", headerTitleAlign: "center" }}
+//       />
+//       <SignUpStack.Screen
+//         name="Signup3"
+//         component={Signup3}
+//         options={{ title: "SignUp", headerTitleAlign: "center" }}
+//       />
+//     </SignUpStack.Navigator>
+//   );
+// }
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup1" component={SignUpStackScreen} />
+        <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen
           name="Home"
           component={MainTab}
-          options={{  headerTitleAlign: "center", }}
+          options={{ headerTitleAlign: "center", }}
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

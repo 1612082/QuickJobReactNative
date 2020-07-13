@@ -8,15 +8,15 @@ export default class Signup1 extends Component {
     this.TouchInside = this.TouchInside.bind(this)
 
   }
-  TouchInside(){
+  TouchInside() {
     this.props.navigation.navigate("Signup2");
   };
   render() {
     return (
-      <View style = {styles.container}>
+      <View style={styles.container}>
         <TextField placeholder={" Email"}></TextField>
         <TextField placeholder={" Tên người dùng"}></TextField>
-        <TextField placeholder={" Số điện thoại"} typekeyboard = "numeric"></TextField>
+        <TextField placeholder={" Số điện thoại"} typekeyboard="numeric"></TextField>
         <ButtonFormat content={"TIẾP TỤC"} TouchInside={this.TouchInside}></ButtonFormat>
       </View>
     );
@@ -24,10 +24,10 @@ export default class Signup1 extends Component {
 }
 
 const styles = StyleSheet.create({
-    container:{
-        justifyContent:"center",
-        height: Dimensions.get("window").height,
-        overflow:"scroll"
+  container: {
+    justifyContent: "center",
+    height: Dimensions.get("window").height,
+    overflow: "scroll"
 
-    },
+  },
 });

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View } from "react-native";
+import { prettierNumber } from "../../helpers/helperFunctions"
 
 // export default class ContentJobCell extends Component {
 //   constructor() {
@@ -20,11 +21,11 @@ import { Text, StyleSheet, View } from "react-native";
 
 export default function ContentJobCell({ item }) {
   return (
-    <View style = {styles.content}>
+    <View style={styles.content}>
       <Text style={styles.textTilte}>{item.title}</Text>
-      <Text style={styles.text}>{item.addr}</Text>
-      <Text style={styles.text}>{item.salary}</Text>
-      <Text style={styles.textCate}>{item.category}</Text>
+      <Text style={styles.text}>{item.district}, {item.province}</Text>
+      <Text style={styles.text}>{prettierNumber(item.salary)}</Text>
+      <Text style={styles.textCate}>{item.dealable ? "Có đấu giá" : "Không đấu giá"}</Text>
     </View>
   );
 }
@@ -37,15 +38,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 13,
-    marginLeft:12,
-    marginTop:12
+    marginLeft: 12,
+    marginTop: 12
   },
-  textCate:{
+  textCate: {
     fontSize: 13,
-    marginLeft:12,
-    marginTop:12,
+    marginLeft: 12,
+    marginTop: 12,
     color: "purple"
   },
-  content:{
+  content: {
   }
 });

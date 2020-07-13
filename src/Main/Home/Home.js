@@ -3,30 +3,9 @@ import { Text, StyleSheet, View, ScrollView, SectionList } from "react-native";
 import ImageBanner from "./ImageBanner";
 import JobCell from "../../Common/JobCell/JobCell"
 import SyncStorage from "sync-storage";
+import axios from "../../ultis/axios.default"
 
-const DATA = [
-  {
-    title: "Top 5 công việc thời vụ",
-    data: [
-      {
-        title: "alibaba",
-        addr: "30b con tê tê",
-        salary: "10000VND",
-        category: "thời vụ"
-      }
-    ],
-  },
-  {
-    title: "Top 5 công việc giao sản phẩm",
-    data: [{
-      title: "alibaba",
-      addr: "30b con tê tê",
-      salary: "10000VND",
-      category: "sản phẩm"
-    }],
-  },
 
-];
 
 export default class Home extends Component {
   constructor(props) {
@@ -45,28 +24,80 @@ export default class Home extends Component {
           "https://theme.hstatic.net/1000026716/1000440777/14/slideshow_4.jpg?v=12549",
       },
     ];
-    this.renderBannerItem = this.renderBannerItem.bind(this);
-    const retrievedItem = SyncStorage.get('token');
-    console.log("hahaha", retrievedItem);
-    if (retrievedItem !== null) {
-      const item = JSON.parse(retrievedItem);
-      console.log(item);
-      const authorization = `Bearer ${item}`;
-      // We have data!!
-      console.log(authorization);
+    this.state = {
+      productionJobs: [],
+      temporalJobs: []
     }
+    this.renderBannerItem = this.renderBannerItem.bind(this);
+    this.getJobs();
+  }
+
+  getJobs() {
+    // get temporal jobs
+    query = {
+      job_type: '0',
+    }
+    axios
+      .post('getJobsList', {
+        page: 1,
+        take: 5,
+        isASC: 1,
+        query: query,
+      })
+      .then(res => {
+        this.setState({ temporalJobs: res.data.data.jobList });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // get production jobs
+    let query = {
+      job_type: '1',
+    }
+    axios
+      .post('getJobsList', {
+        page: 1,
+        take: 5,
+        isASC: 1,
+        query: query,
+      })
+      .then(res => {
+        this.setState({ productionJobs: res.data.data.jobList });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   renderBannerItem(listBanner) {
-    return listBanner.map((item) => (
+    return listBanner.map((item, index) => (
       <ImageBanner
         // navigation={props.navigation}
         item={item}
+        key={index}
       ></ImageBanner>
     ));
   }
 
+  selectJob(job) {
+    this.props.navigation.navigate('JobDetail', {
+      jobId: 86,
+    });
+  }
+
   render() {
+    let { productionJobs, temporalJobs } = this.state;
+    let DATA = [
+      {
+        title: "Top 5 công việc thời vụ",
+        data: temporalJobs,
+      },
+      {
+        title: "Top 5 công việc giao sản phẩm",
+        data: productionJobs,
+      },
+
+    ];
     return (
       <ScrollView style={styles.container}>
         <ScrollView horizontal={true} style={styles.scr}>
@@ -75,7 +106,7 @@ export default class Home extends Component {
         <SectionList
           sections={DATA}
           keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <JobCell item={item} />}
+          renderItem={({ item }) => <JobCell item={item} onPress={() => this.selectJob(item)} />}
           renderSectionHeader={({ section: { title } }) => (
             <Text style={styles.header}>{title}</Text>
           )}

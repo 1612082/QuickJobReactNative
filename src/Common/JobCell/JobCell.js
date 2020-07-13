@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import ContentJobCell from "./ContentJobCell";
+import { getImageSrc } from "../../helpers/helperFunctions"
 // export default class JobCell extends Component {
 //   constructor() {
 //     super(props);
@@ -28,16 +29,12 @@ import ContentJobCell from "./ContentJobCell";
 //   }
 // }
 
-export default function JobCell({ item }) {
-  const onPressItem = () => {
-    // props.navigation.navigate(props.NameScreen);
-  };
+export default function JobCell({ item, onPress }) {
   return (
-    <TouchableOpacity style={styles.item} onPress={onPressItem}>
+    <TouchableOpacity style={styles.item} onPress={() => onPress(item)}>
       <Image
         source={{
-          uri:
-            "https://image.shutterstock.com/image-vector/good-job-poster-banner-greeting-260nw-546096688.jpg",
+          uri: getImageSrc(item.img)
         }}
         style={styles.logo}
       />
@@ -55,8 +52,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
-  item:{
-    flexDirection:"row",
-    margin:20
+  item: {
+    flexDirection: "row",
+    margin: 20
   }
 });

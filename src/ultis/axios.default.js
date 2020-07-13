@@ -11,8 +11,10 @@ let axios = Axios.create({
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
     //get token  
-    let token = JSON.parse(SyncStorage.get('token'));
-    config.headers.Authorization = token ? `Bearer ${token}` : "";
+    if (SyncStorage.get('token')) {
+        let token = JSON.parse(SyncStorage.get('token'));
+        config.headers.Authorization = token ? `Bearer ${token}` : "";
+    }
     return config;
 });
 
@@ -30,7 +32,7 @@ axios.interceptors.response.use(
                 [
                     {
                         text: 'OK', onPress: () => {
-                            // localStorage.clear();
+                            SyncStorage.getAllKeys().map(k => SyncStorage.remove(k));
                             // history.push("/login");
                             // MyStore.dispatch({
                             //     type: "USER_LOG_OUT",
