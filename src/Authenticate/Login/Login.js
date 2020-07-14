@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import SyncStorage from "sync-storage";
-import { Text, StyleSheet, View, TouchableOpacity, Linking, KeyboardAvoidingView, Alert } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Linking,
+  KeyboardAvoidingView,
+  Alert,
+} from "react-native";
 
 import TextField from "../../Common/TextField";
 import { linkForgotPass } from "../../Global/string";
 import Logo from "../../Common/Logo";
 import ButtonFormat from "../../Common/Button";
-import axios from "../../ultis/axios.default"
+import axios from "../../ultis/axios.default";
 
 export default class Login extends Component {
   constructor(props) {
@@ -14,7 +22,7 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-    }
+    };
     this.TouchSignup = this.TouchSignup.bind(this);
     this.TouchLogin = this.TouchLogin.bind(this);
   }
@@ -23,19 +31,27 @@ export default class Login extends Component {
   }
   TouchLogin() {
     axios
-      .post('login', {
+      .post("login", {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.code === "-101") {
           // thất bại
           Alert.alert(res.data.message);
         } else {
           // thành công
-          SyncStorage.set("token", JSON.stringify(res.data.data.token));
-          SyncStorage.set("user", JSON.stringify(res.data.data.user));
-          this.props.navigation.navigate("Home");
+          if (res.data.data.user.isBusinessUser) {
+            Alert.alert(
+              "Đăng nhập không thành công",
+              "Tài khoản của bạn là tài khoản doanh nghiệp, không hỗ trợ ở mảng di động, vui lòng đăng nhập lại."
+            );
+          } else {
+            SyncStorage.set("token", JSON.stringify(res.data.data.token));
+            SyncStorage.set("user", JSON.stringify(res.data.data.user));
+            this.props.navigation.navigate("Home");
+          }
+
           // lấy thông tin user
           // getUserInfo().then(res => {
           //   if (res.data.code === '200') {
@@ -50,9 +66,8 @@ export default class Login extends Component {
           //   console.log(err);
           // })
         }
-
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -83,11 +98,15 @@ export default class Login extends Component {
             content={"ĐĂNG KÝ"}
             TouchInside={this.TouchSignup}
           ></ButtonFormat>
-          <TouchableOpacity style={styles.touch} onPress={() => { Linking.openURL(linkForgotPass) }}>
+          <TouchableOpacity
+            style={styles.touch}
+            onPress={() => {
+              Linking.openURL(linkForgotPass);
+            }}
+          >
             <Text style={styles.underline}>Quên mật khẩu?</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
-
       </View>
     );
   }
