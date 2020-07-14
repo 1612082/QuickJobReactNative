@@ -22,39 +22,8 @@ export default class Login extends Component {
     this.props.navigation.navigate("Signup");
   }
   TouchLogin() {
-    axios
-      .post('login', {
-        email: this.state.email,
-        password: this.state.password
-      })
-      .then(res => {
-        if (res.data.code === "-101") {
-          // thất bại
-          Alert.alert(res.data.message);
-        } else {
-          // thành công
-          SyncStorage.set("token", JSON.stringify(res.data.data.token));
-          SyncStorage.set("user", JSON.stringify(res.data.data.user));
-          this.props.navigation.navigate("Home");
-          // lấy thông tin user
-          // getUserInfo().then(res => {
-          //   if (res.data.code === '200') {
-          //     dispatch(updateUser(res.data.data.personal))
-          //     dispatch(success(res.data.message));
-          //     this.props.navigation.navigate("Home");
-          //   }
-          //   else {
-          //     Alert.alert('Lấy dữ liệu cá nhân thất bại.');
-          //   }
-          // }).catch(err => {
-          //   console.log(err);
-          // })
-        }
-
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.props.navigation.navigate("Home");
+     
   }
 
   render() {

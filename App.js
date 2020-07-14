@@ -10,9 +10,9 @@ import Signup from "./src/Authenticate/SignUp/Signup";
 
 import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
 
-// import Signup1 from "./src/Authenticate/SignUp/Signup1";
-// import Signup2 from "./src/Authenticate/SignUp/Signup2";
-// import Signup3 from "./src/Authenticate/SignUp/Signup3";
+import Signup1 from "./src/Authenticate/SignUp/Signup1";
+import Signup2 from "./src/Authenticate/SignUp/Signup2";
+import Signup3 from "./src/Authenticate/SignUp/Signup3";
 
 
 import Home from "./src/Main/Home/Home";
@@ -21,7 +21,7 @@ import Chat from "./src/Main/Chat/Chat";
 import Manage from "./src/Main/Manage/Manage";
 import Profile from "./src/Main/Profile/Profile";
 import SyncStorage from "sync-storage";
-
+import DetailProfile from "./src/Main/Profile/DetailProfile"
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const MainTab = (props) => {
@@ -87,38 +87,54 @@ const MainTab = (props) => {
 };
 const SignUpStack = createStackNavigator();
 
-// function SignUpStackScreen() {
-//   return (
-//     <SignUpStack.Navigator>
-//       <SignUpStack.Screen
-//         name="Signup1"
-//         component={Signup1}
-//         options={{ title: "SignUp", headerTitleAlign: "center" }}
-//       />
-//       <SignUpStack.Screen
-//         name="Signup2"
-//         component={Signup2}
-//         options={{ title: "SignUp", headerTitleAlign: "center" }}
-//       />
-//       <SignUpStack.Screen
-//         name="Signup3"
-//         component={Signup3}
-//         options={{ title: "SignUp", headerTitleAlign: "center" }}
-//       />
-//     </SignUpStack.Navigator>
-//   );
-// }
+const Signups = (props) => {
+  return (
+    <SignUpStack.Navigator>
+      <SignUpStack.Screen
+        name="Signup"
+        component={Signup1}
+      />
+      <SignUpStack.Screen
+        name="Signup2"
+        component={Signup2}
+      />
+      <SignUpStack.Screen
+        name="Signup3"
+        component={Signup3}
+      />
+    </SignUpStack.Navigator>
+  );
+}
+const ProfileStack = createStackNavigator();
 
+const Profiles = (props) => {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="Profile"
+        component={Profile}
+      />
+      <ProfileStack.Screen
+        name="DetailProfile"
+        component={DetailProfile}
+      />
+    </ProfileStack.Navigator>
+  );
+}
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Signup" component={Signups} />
         <Stack.Screen
           name="Home"
           component={MainTab}
           options={{ headerTitleAlign: "center", }}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="Profile"
+          component={Profiles}
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
