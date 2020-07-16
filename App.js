@@ -7,13 +7,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Login from "./src/Authenticate/Login/Login";
 import Signup from "./src/Authenticate/SignUp/Signup";
+import JobDetail from "./src/Main/JobDetail/JobDetail";
 
 import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
 
 // import Signup1 from "./src/Authenticate/SignUp/Signup1";
 // import Signup2 from "./src/Authenticate/SignUp/Signup2";
 // import Signup3 from "./src/Authenticate/SignUp/Signup3";
-
 
 import Home from "./src/Main/Home/Home";
 import Search from "./src/Main/Search/Search";
@@ -27,24 +27,30 @@ const Tab = createBottomTabNavigator();
 const MainTab = (props) => {
   props.navigation.setOptions({
     headerRight: () => (
-      <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5} onPress={() => props.navigation.navigate("Notification")}>
+      <TouchableOpacity
+        style={styles.FacebookStyle}
+        activeOpacity={0.5}
+        onPress={() => props.navigation.navigate("Notification")}
+      >
         <Image
-          source={require('./assets/noti.png')}
+          source={require("./assets/noti.png")}
           style={styles.ImageIconStyle}
         />
-
       </TouchableOpacity>
     ),
     headerLeft: () => (
-      <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5} onPress={() => {
-        props.navigation.navigate("Login");
-        SyncStorage.getAllKeys().map(k => SyncStorage.remove(k));
-      }}>
+      <TouchableOpacity
+        style={styles.FacebookStyle}
+        activeOpacity={0.5}
+        onPress={() => {
+          props.navigation.navigate("Login");
+          SyncStorage.getAllKeys().map((k) => SyncStorage.remove(k));
+        }}
+      >
         <Image
           source={require("./assets/logout.png")}
           style={styles.ImageIconStyle}
         />
-
       </TouchableOpacity>
     ),
   });
@@ -60,12 +66,12 @@ const MainTab = (props) => {
       <Tab.Screen
         name="Home"
         component={Home}
-        options={{ title: "Home", headerTitleAlign: "center", }}
+        options={{ title: "Home", headerTitleAlign: "center" }}
       />
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ title: "Search", headerShown: false, }}
+        options={{ title: "Search", headerShown: false }}
       />
       <Tab.Screen
         name="Chat"
@@ -118,8 +124,9 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={MainTab}
-          options={{ headerTitleAlign: "center", }}
+          options={{ headerTitleAlign: "center" }}
         ></Stack.Screen>
+        <Stack.Screen name="JobDetail" component={JobDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
