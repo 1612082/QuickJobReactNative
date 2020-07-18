@@ -8,6 +8,7 @@ import {
   Linking,
   KeyboardAvoidingView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 
 import TextField from "../../Common/TextField";
@@ -22,6 +23,7 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      isSending: false,
     };
     this.TouchSignup = this.TouchSignup.bind(this);
     this.TouchLogin = this.TouchLogin.bind(this);
@@ -30,6 +32,7 @@ export default class Login extends Component {
     this.props.navigation.navigate("Signup");
   }
   TouchLogin() {
+    this.setState({ isSending: true });
     axios
       .post("login", {
         email: this.state.email,
@@ -38,9 +41,11 @@ export default class Login extends Component {
       .then((res) => {
         if (res.data.code === "-101") {
           // thất bại
+          this.setState({ isSending: false });
           Alert.alert(res.data.message);
         } else {
           // thành công
+          this.setState({ isSending: false });
           if (res.data.data.user.isBusinessUser) {
             Alert.alert(
               "Đăng nhập không thành công",
@@ -68,6 +73,7 @@ export default class Login extends Component {
         }
       })
       .catch((error) => {
+        this.setState({ isSending: false });
         console.log(error);
       });
   }
@@ -90,6 +96,7 @@ export default class Login extends Component {
               this.setState({ password: text });
             }}
           ></TextField>
+          {this.state.isSending ? <ActivityIndicator size="large" /> : <></>}
           <ButtonFormat
             content={"ĐĂNG NHẬP"}
             TouchInside={this.TouchLogin}
