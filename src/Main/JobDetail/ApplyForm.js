@@ -18,10 +18,11 @@ import { prettierNumber } from "../../helpers/helperFunctions";
 export default class ApplyForm extends Component {
   constructor(props) {
     super(props);
-    const { jobId, salary } = this.props.route.params;
+    const { jobId, salary, dealable } = this.props.route.params;
     this.state = {
       jobId: jobId,
       salary: salary,
+      dealable: dealable,
       proposed_price: 0,
       introduction_string: "",
       isSending: false,
@@ -32,7 +33,14 @@ export default class ApplyForm extends Component {
 
   ApplyJob() {
     //check input
-    let { jobId, salary, proposed_price, introduction_string } = this.state;
+    let {
+      jobId,
+      salary,
+      dealable,
+      proposed_price,
+      introduction_string,
+    } = this.state;
+    if (!dealable) proposed_price = salary;
     if (proposed_price == 0) {
       this.setState({ message: "Vui lòng nhập lương mong muốn" });
       return;
@@ -102,13 +110,17 @@ export default class ApplyForm extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView behavior="position">
           <Text></Text>
-          <TextField
-            placeholder={"Lương mong muốn (VNĐ)"}
-            typekeyboard="numeric"
-            onChangeText={(text) => {
-              this.setState({ proposed_price: text });
-            }}
-          ></TextField>
+          {this.state.dealable ? (
+            <TextField
+              placeholder={"Lương mong muốn (VNĐ)"}
+              typekeyboard="numeric"
+              onChangeText={(text) => {
+                this.setState({ proposed_price: text });
+              }}
+            ></TextField>
+          ) : (
+            <></>
+          )}
           <TextField
             placeholder={"Đôi lời tự giới thiệu"}
             onChangeText={(text) => {

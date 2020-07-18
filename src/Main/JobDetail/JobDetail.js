@@ -70,6 +70,7 @@ export default class JobDetail extends Component {
     this.props.navigation.navigate("ApplyForm", {
       jobId: jobId,
       salary: jobDetail.salary,
+      dealable: jobDetail.dealable,
       reloadData: this.loadData.bind(this),
     });
   }
