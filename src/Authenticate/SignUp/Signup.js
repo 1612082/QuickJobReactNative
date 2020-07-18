@@ -42,32 +42,32 @@ export default class Signup extends Component {
     this.setState({ isShow: true });
   }
   onGoToStepTwo() {
-    // let { account } = this.state;
-    // //Kiem tra nhap gia tri chua
-    // if (account.email == "") {
-    //   this.setState({ errors: true, message: "Vui lòng nhập email" });
-    // } else if (account.fullname == "") {
-    //   this.setState({ errors: true, message: "Vui lòng nhập tên người dùng" });
-    // } else if (account.dial == "") {
-    //   this.setState({ errors: true, message: "Vui lòng nhập số điện thoại" });
-    // } else if (account.address == "") {
-    //   this.setState({ errors: true, message: "Vui lòng nhập địa chỉ" });
-    // } else {
-    //   //Kiem tra dinh dang email
-    //   let lastAtPos = account.email.lastIndexOf("@");
-    //   let lastDotPos = account.email.lastIndexOf(".");
-    //   if (
-    //     !(
-    //       lastAtPos < lastDotPos &&
-    //       lastAtPos > 0 &&
-    //       account.email.indexOf("@@") == -1 &&
-    //       lastDotPos > 2 &&
-    //       account.email.length - lastDotPos > 2
-    //     )
-    //   ) {
-    //     this.setState({ errors: true, message: "Email không đúng định dạng" });
-    //   } else this.setState({ errors: false, message: "" });
-    // }
+    let { account } = this.state;
+    //Kiem tra nhap gia tri chua
+    if (account.email == "") {
+      this.setState({ errors: true, message: "Vui lòng nhập email" });
+    } else if (account.fullname == "") {
+      this.setState({ errors: true, message: "Vui lòng nhập tên người dùng" });
+    } else if (account.dial == "") {
+      this.setState({ errors: true, message: "Vui lòng nhập số điện thoại" });
+    } else if (account.address == "") {
+      this.setState({ errors: true, message: "Vui lòng nhập địa chỉ" });
+    } else {
+      //Kiem tra dinh dang email
+      let lastAtPos = account.email.lastIndexOf("@");
+      let lastDotPos = account.email.lastIndexOf(".");
+      if (
+        !(
+          lastAtPos < lastDotPos &&
+          lastAtPos > 0 &&
+          account.email.indexOf("@@") == -1 &&
+          lastDotPos > 2 &&
+          account.email.length - lastDotPos > 2
+        )
+      ) {
+        this.setState({ errors: true, message: "Email không đúng định dạng" });
+      } else this.setState({ errors: false, message: "" });
+    }
   }
 
   onRegister() {
@@ -200,7 +200,7 @@ export default class Signup extends Component {
             </KeyboardAvoidingView>
           </View>
         </ProgressStep>
-        <ProgressStep
+        {/* <ProgressStep
           label="Bước 2"
           nextBtnText="Tiếp theo"
           previousBtnText="Trở về"
@@ -254,7 +254,6 @@ export default class Signup extends Component {
               ) : (
                 <></>
               )}
-              {/* <Text style={styles.text}>Chọn giới tính</Text> */}
               <Text></Text>
               <Picker
                 selectedValue={this.state.account.gender.toString()}
@@ -275,23 +274,17 @@ export default class Signup extends Component {
                 <Picker.Item label="Nam" value="1" />
                 <Picker.Item label="Nữ" value="0" />
               </Picker>
-              {/* <RNPickerSelect
-                                placeholder={{ label: 'Chọn giới tính...', value: -1 }}
-                                style={{ width: "80%", alignSelf: "center", }}
-                                onValueChange={(value) => console.log(value)}
-                                items={[
-                                    { label: 'Nam', value: 1 },
-                                    { label: 'Nữ', value: 0 },
-                                ]}
-                            /> */}
             </KeyboardAvoidingView>
           </View>
-        </ProgressStep>
+        </ProgressStep> */}
         <ProgressStep
-          label="Bước 3"
+          label="Bước 2"
           finishBtnText="Đăng ký"
           previousBtnText="Trở về"
           onSubmit={this.onRegister}
+          onPrevious={() => {
+            this.setState({ errors: false, message: "" });
+          }}
         >
           <View style={styles.container}>
             <KeyboardAvoidingView behavior="position">
