@@ -4,7 +4,7 @@ export default function SearchBar(props) {
   return (
     <View style={styles.viewSearch}>
       <TextInput
-        placeholder="  Tìm kiếm theo tên công việc"
+        placeholder="Tìm kiếm theo tên công việc"
         style={styles.search}
       ></TextInput>
       <Image
@@ -18,10 +18,9 @@ export default function SearchBar(props) {
 const styles = StyleSheet.create({
   viewSearch: {
     height: 50,
-    flexDirection:"row",
-    width:"80%",
-    marginLeft:"5%"
-
+    flexDirection: "row",
+    width: "80%",
+    marginLeft: "5%",
   },
   search: {
     flex: 1,
@@ -30,12 +29,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize: 15,
     borderRadius: 15,
+    paddingLeft: 10,
   },
   icon: {
-    left:"89%",
-    top:"5%",
-    height:30,
-    width:30,
-    position: 'absolute'
+    left: "89%",
+    top: "5%",
+    height: 30,
+    width: 30,
+    position: "absolute",
   },
 });

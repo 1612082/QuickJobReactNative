@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Login from "./src/Authenticate/Login/Login";
 import Signup from "./src/Authenticate/SignUp/Signup";
 import JobDetail from "./src/Main/JobDetail/JobDetail";
+import ApplyForm from "./src/Main/JobDetail/ApplyForm";
 
 import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
 
@@ -127,6 +128,7 @@ export default function App() {
           options={{ headerTitleAlign: "center" }}
         ></Stack.Screen>
         <Stack.Screen name="JobDetail" component={JobDetail} />
+        <Stack.Screen name="ApplyForm" component={ApplyForm} />
       </Stack.Navigator>
     </NavigationContainer>
   );

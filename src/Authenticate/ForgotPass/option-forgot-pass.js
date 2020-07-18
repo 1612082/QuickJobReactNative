@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 const OptionForgotPass = () => {
     return (
         <View style = {styles.viewStyle}>
-            <TextInput placeholder = ' Email' style={{borderColor:'gray', borderWidth:1, width:'80%', color:'white', height:40}}>
+            <TextInput placeholder = 'Email' style={{borderColor:'gray', borderWidth:1, width:'80%', color:'white', height:40}}>
 
             </TextInput>
             <TouchableOpacity style={[styles.btn,{backgroundColor:'dodgerblue',marginTop:15 }]}>

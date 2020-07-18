@@ -45,10 +45,10 @@ export default class Signup2 extends Component {
             }}
           />
           <Text style={styles.text}>Địa chỉ</Text>
-          <TextField placeholder={" Thành phố"}></TextField>
-          <TextField placeholder={" Quận/ Huyện"}></TextField>
+          <TextField placeholder={"Thành phố"}></TextField>
+          <TextField placeholder={"Quận/ Huyện"}></TextField>
           <TextField
-            placeholder={" Phường/ Xã"}
+            placeholder={"Phường/ Xã"}
             typekeyboard="numeric"
           ></TextField>
           <ButtonFormat content={"TIẾP TỤC"} TouchInside={this.TouchInside}></ButtonFormat>

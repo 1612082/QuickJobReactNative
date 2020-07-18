@@ -84,13 +84,13 @@ export default class Login extends Component {
         <KeyboardAvoidingView behavior="position">
           <Logo></Logo>
           <TextField
-            placeholder={" Email"}
+            placeholder={"Email"}
             onChangeText={(text) => {
               this.setState({ email: text });
             }}
           ></TextField>
           <TextField
-            placeholder={" Mật khẩu"}
+            placeholder={"Mật khẩu"}
             pass={true}
             onChangeText={(text) => {
               this.setState({ password: text });

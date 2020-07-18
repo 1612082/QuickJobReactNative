@@ -14,9 +14,9 @@ export default class Signup1 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TextField placeholder={" Email"}></TextField>
-        <TextField placeholder={" Tên người dùng"}></TextField>
-        <TextField placeholder={" Số điện thoại"} typekeyboard="numeric"></TextField>
+        <TextField placeholder={"Email"}></TextField>
+        <TextField placeholder={"Tên người dùng"}></TextField>
+        <TextField placeholder={"Số điện thoại"} typekeyboard="numeric"></TextField>
         <ButtonFormat content={"TIẾP TỤC"} TouchInside={this.TouchInside}></ButtonFormat>
       </View>
     );

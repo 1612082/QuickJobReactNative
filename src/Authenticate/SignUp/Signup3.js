@@ -8,8 +8,8 @@ export default class Signup3 extends Component {
     return (
       <View style={styles.container}>
         <KeyboardAvoidingView behavior="position">
-          <TextField placeholder={" Mật khẩu"} pass={true}></TextField>
-          <TextField placeholder={" Nhập lại mật khẩu"} pass={true}></TextField>
+          <TextField placeholder={"Mật khẩu"} pass={true}></TextField>
+          <TextField placeholder={"Nhập lại mật khẩu"} pass={true}></TextField>
         </KeyboardAvoidingView>
       </View>
     );

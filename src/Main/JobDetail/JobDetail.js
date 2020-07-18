@@ -27,9 +27,15 @@ export default class JobDetail extends Component {
       jobDetail: null,
       isLoading: false,
     };
+    this.ApplyJob = this.ApplyJob.bind(this);
   }
   componentWillMount() {
+    this.loadData();
+  }
+
+  loadData() {
     let { jobId } = this.state;
+    console.log("load job detail");
     this.setState({ isLoading: true });
     axios
       .get("/getJobById/" + jobId)
@@ -57,6 +63,15 @@ export default class JobDetail extends Component {
       );
     });
     return content;
+  }
+
+  ApplyJob() {
+    let { jobId, jobDetail } = this.state;
+    this.props.navigation.navigate("ApplyForm", {
+      jobId: jobId,
+      salary: jobDetail.salary,
+      reloadData: this.loadData.bind(this),
+    });
   }
 
   render() {
@@ -133,6 +148,12 @@ export default class JobDetail extends Component {
             ) : (
               <></>
             )}
+            <ButtonFormat
+              content={"ĐĂNG KÝ ỨNG TUYỂN"}
+              TouchInside={this.ApplyJob}
+            ></ButtonFormat>
+            <Text></Text>
+            <Text></Text>
           </>
         )}
       </ScrollView>

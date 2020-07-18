@@ -147,7 +147,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Email"}
+                placeholder={"Email"}
               ></TextField>
               <TextField
                 defaultValue={this.state.account.fullname}
@@ -161,7 +161,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Tên người dùng"}
+                placeholder={"Tên người dùng"}
               ></TextField>
               <TextField
                 defaultValue={this.state.account.dial}
@@ -175,7 +175,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Số điện thoại"}
+                placeholder={"Số điện thoại"}
                 typekeyboard="numeric"
               ></TextField>
               <TextField
@@ -190,7 +190,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Địa chỉ"}
+                placeholder={"Địa chỉ"}
               ></TextField>
               {this.state.errors ? (
                 <Text style={styles.errorMessage}>{this.state.message}</Text>
@@ -306,7 +306,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Mật khẩu"}
+                placeholder={"Mật khẩu"}
                 pass={true}
               ></TextField>
               <TextField
@@ -320,7 +320,7 @@ export default class Signup extends Component {
                     account: account,
                   });
                 }}
-                placeholder={" Nhập lại mật khẩu"}
+                placeholder={"Nhập lại mật khẩu"}
                 pass={true}
               ></TextField>
               {this.state.errors ? (
