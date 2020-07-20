@@ -21,6 +21,7 @@ import Search from "./src/Main/Search/Search";
 // import Chat from "./src/Main/Chat/Chat";
 import Manager from "./src/Main/Manager/Manager";
 import ApplyingJob from "./src/Main/Manager/Job/ApplyingJob";
+import Applicant from "./src/Main/Manager/Job/Applicant";
 import Profile from "./src/Main/Profile/Profile";
 import SyncStorage from "sync-storage";
 import DetailProfile from "./src/Main/Profile/DetailProfile";
@@ -126,6 +127,7 @@ export default function App() {
           options={{ headerTitleAlign: "center" }}
         ></Stack.Screen>
         <Stack.Screen name="JobDetail" component={JobDetail} />
+        <Stack.Screen name="Applicant" component={Applicant} />
         <Stack.Screen name="ApplyForm" component={ApplyForm} />
         <Stack.Screen name="Profile" component={Profiles}></Stack.Screen>
       </Stack.Navigator>

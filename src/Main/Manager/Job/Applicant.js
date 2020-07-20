@@ -8,97 +8,69 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   Image,
-  Alert,
 } from "react-native";
 import SyncStorage from "sync-storage";
 import axios from "../../../ultis/axios.default";
 // import CompanyPlaceholder from "./company.png";
 import { getImageSrc, prettierNumber } from "../../../helpers/helperFunctions";
 
-export default class ApplyingJob extends Component {
+export default class Applicant extends Component {
   constructor(props) {
     super(props);
+    const { jobId } = this.props.route.params;
+
     this.state = {
-      isLoadingApplyingJobsList: false,
-      applyingJobsList: [],
-      totalApplyingJobs: 0,
+      jobId: jobId,
+      isLoadingApplicantsList: false,
+      applicantsList: [],
+      totalApplicants: 0,
       currentApplyingPage: 0,
     };
-    this.selectJob = this.selectJob.bind(this);
     this.handlePagination = this.handlePagination.bind(this);
   }
   componentDidMount() {
     let { currentApplyingPage } = this.state;
-    this.getJobs(currentApplyingPage);
+    this.getApplicants(currentApplyingPage);
   }
 
-  getJobs(page) {
-    this.setState({ isLoadingApplyingJobsList: true });
+  getApplicants(page) {
+    let { jobId } = this.state;
+    this.setState({ isLoadingApplicantsList: true });
     axios
       .post("jobs/getJobsByEmployerIdForWeb", {
+        id: jobId,
         page: page,
         take: 4,
-        isASC: 1,
-        status: 1,
+        status: 0,
       })
       .then((res) => {
         this.setState({
-          applyingJobsList: res.data.data.jobList,
+          applicantsList: res.data.data.applicantsList,
           currentApplyingPage: res.data.data.page,
-          totalApplyingJobs: res.data.data.total,
-          isLoadingApplyingJobsList: false,
+          totalApplicants: res.data.data.total,
+          isLoadingApplicantsList: false,
         });
       })
       .catch((error) => {
-        this.setState({ isLoadingApplyingJobsList: false });
+        this.setState({ isLoadingApplicantsList: false });
         console.log(error);
       });
   }
 
-  selectJob(job) {
-    // this.props.navigation.navigate("Applicant", {
-    //   jobId: job.id_job,
-    // });
-    Alert.alert(
-      "Thành thật xin lỗi",
-      "Tính năng chưa hoàn thiện, vui lòng thử lại sau"
-    );
-  }
-
-  renderJob(item) {
-    let logo = "./company.png";
-    if (item.imgs != null && item.imgs.length !== 0) {
-      logo = getImageSrc(item.imgs[0]);
-    }
+  renderApplicant(item) {
     return (
-      <TouchableOpacity
-        style={styles.jobItem}
-        onPress={() => this.selectJob(item)}
-      >
-        <Image
-          source={{
-            uri: logo,
-          }}
-          style={styles.logo}
-        />
-
+      <View style={styles.jobItem}>
         <View style={styles.content}>
-          <Text style={styles.textTilte}>{item.title}</Text>
-          <Text style={styles.text}>Số người cần tuyển: {item.vacancy}</Text>
-          <Text style={styles.text}>
-            Số người đã tuyển: {item.participants}
-          </Text>
-          <Text style={styles.text}>
-            Số người đang đăng kí: {item.candidates}
-          </Text>
+          <Text style={styles.textTilte}>asdasd</Text>
+          <Text style={styles.text}>Số người cần tuyển: </Text>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 
   handlePagination(pageNum) {
     if (pageNum !== this.state.currentApplyingPage) {
-      this.getJobs(pageNum);
+      this.getApplicants(pageNum);
     }
   }
 
@@ -140,28 +112,28 @@ export default class ApplyingJob extends Component {
 
   render() {
     let {
-      applyingJobsList,
-      totalApplyingJobs,
+      applicantsList,
+      totalApplicants,
       currentApplyingPage,
-      isLoadingApplyingJobsList,
+      isLoadingApplicantsList,
     } = this.state;
-    let totalPage = Math.ceil(totalApplyingJobs / 4);
-    let applyingJobsListData = [
+    let totalPage = Math.ceil(totalApplicants / 4);
+    let applicantsListData = [
       {
-        title: "Danh sách công việc đang tuyển",
-        data: applyingJobsList,
+        title: "Danh sách ứng viên",
+        data: applicantsList,
       },
     ];
     return (
       <ScrollView style={styles.container}>
-        {isLoadingApplyingJobsList ? (
+        {isLoadingApplicantsList ? (
           <ActivityIndicator size="large" />
         ) : (
           <>
             <SectionList
-              sections={applyingJobsListData}
+              sections={applicantsListData}
               keyExtractor={(item, index) => item + index}
-              renderItem={({ item }) => this.renderJob(item)}
+              renderItem={({ item }) => this.renderApplicant(item)}
               renderSectionHeader={({ section: { title } }) => (
                 <Text style={styles.header}>{title}</Text>
               )}
