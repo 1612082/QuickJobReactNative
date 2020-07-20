@@ -170,16 +170,6 @@ export default class Home extends Component {
               }}
             >
               {this.renderPagination(currentApplyingPage, totalPage)}
-
-              {/* <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  borderColor: "dodgerblue",
-                  marginRight: 10,
-                }}
-              >
-                <Text>Hhihihi </Text>
-              </TouchableOpacity> */}
             </View>
           </>
         )}

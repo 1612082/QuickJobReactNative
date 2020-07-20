@@ -1,16 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 export default function SearchBar(props) {
   return (
     <View style={styles.viewSearch}>
       <TextInput
         placeholder="Tìm kiếm theo tên công việc"
         style={styles.search}
+        onChangeText={(text) => props.onChangeText(text)}
       ></TextInput>
-      <Image
-        source={require("../../assets/search.png")}
-        style={styles.icon}
-      ></Image>
+      <TouchableOpacity style={styles.icon} onPress={() => props.searchClick()}>
+        <Image
+          source={require("../../assets/search.png")}
+          style={styles.image}
+        ></Image>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -19,7 +29,7 @@ const styles = StyleSheet.create({
   viewSearch: {
     height: 50,
     flexDirection: "row",
-    width: "80%",
+    width: "90%",
     marginLeft: "5%",
   },
   search: {
@@ -37,5 +47,9 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     position: "absolute",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
 });
