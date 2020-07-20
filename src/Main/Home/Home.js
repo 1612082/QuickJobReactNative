@@ -101,6 +101,7 @@ export default class Home extends Component {
   selectJob(job) {
     this.props.navigation.navigate("JobDetail", {
       jobId: job.id_job,
+      
     });
   }
 

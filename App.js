@@ -10,16 +10,17 @@ import Signup from "./src/Authenticate/SignUp/Signup";
 import JobDetail from "./src/Main/JobDetail/JobDetail";
 import ApplyForm from "./src/Main/JobDetail/ApplyForm";
 
-import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
+// import ForgotPassword from "./src/Authenticate/ForgotPass/forgot-pass";
 
-import Signup1 from "./src/Authenticate/SignUp/Signup1";
-import Signup2 from "./src/Authenticate/SignUp/Signup2";
-import Signup3 from "./src/Authenticate/SignUp/Signup3";
+// import Signup1 from "./src/Authenticate/SignUp/Signup1";
+// import Signup2 from "./src/Authenticate/SignUp/Signup2";
+// import Signup3 from "./src/Authenticate/SignUp/Signup3";
 
 import Home from "./src/Main/Home/Home";
 import Search from "./src/Main/Search/Search";
-import Chat from "./src/Main/Chat/Chat";
-import Manage from "./src/Main/Manage/Manage";
+// import Chat from "./src/Main/Chat/Chat";
+import Manager from "./src/Main/Manager/Manager";
+import ApplyingJob from "./src/Main/Manager/Job/ApplyingJob";
 import Profile from "./src/Main/Profile/Profile";
 import SyncStorage from "sync-storage";
 import DetailProfile from "./src/Main/Profile/DetailProfile";
@@ -67,42 +68,42 @@ const MainTab = (props) => {
       <Tab.Screen
         name="Home"
         component={Home}
-        options={{ title: "Home", headerTitleAlign: "center" }}
+        options={{ title: "Trang chủ", headerTitleAlign: "center" }}
       />
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ title: "Search", headerShown: false }}
+        options={{ title: "Tìm kiếm", headerShown: false }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Chat"
         component={Chat}
         options={{ title: "Chat", headerTitleAlign: "center" }}
-      />
+      /> */}
       <Tab.Screen
         name="Manage"
-        component={Manage}
-        options={{ title: "Manage", headerTitleAlign: "center" }}
+        component={ApplyingJob}
+        options={{ title: "Quản lý việc", headerTitleAlign: "center" }}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{ title: "Profile", headerTitleAlign: "center" }}
+        options={{ title: "Hồ sơ", headerTitleAlign: "center" }}
       />
     </Tab.Navigator>
   );
 };
-const SignUpStack = createStackNavigator();
+// const SignUpStack = createStackNavigator();
 
-const Signups = (props) => {
-  return (
-    <SignUpStack.Navigator>
-      <SignUpStack.Screen name="Signup" component={Signup1} />
-      <SignUpStack.Screen name="Signup2" component={Signup2} />
-      <SignUpStack.Screen name="Signup3" component={Signup3} />
-    </SignUpStack.Navigator>
-  );
-};
+// const Signups = (props) => {
+//   return (
+//     <SignUpStack.Navigator>
+//       <SignUpStack.Screen name="Signup" component={Signup1} />
+//       <SignUpStack.Screen name="Signup2" component={Signup2} />
+//       <SignUpStack.Screen name="Signup3" component={Signup3} />
+//     </SignUpStack.Navigator>
+//   );
+// };
 const ProfileStack = createStackNavigator();
 
 const Profiles = (props) => {
@@ -118,7 +119,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signups} />
+        <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen
           name="Home"
           component={MainTab}
@@ -126,7 +127,7 @@ export default function App() {
         ></Stack.Screen>
         <Stack.Screen name="JobDetail" component={JobDetail} />
         <Stack.Screen name="ApplyForm" component={ApplyForm} />
-        <Stack.Screen name="Profile" component={Profile}></Stack.Screen>
+        <Stack.Screen name="Profile" component={Profiles}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import ContentJobCell from "./ContentJobCell";
-import { getImageSrc } from "../../helpers/helperFunctions"
+import { getImageSrc } from "../../helpers/helperFunctions";
 // export default class JobCell extends Component {
 //   constructor() {
 //     super(props);
@@ -34,7 +34,7 @@ export default function JobCell({ item, onPress }) {
     <TouchableOpacity style={styles.item} onPress={() => onPress(item)}>
       <Image
         source={{
-          uri: getImageSrc(item.img)
+          uri: getImageSrc(item.img),
         }}
         style={styles.logo}
       />
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: "row",
-    margin: 20
-  }
+    margin: 20,
+  },
 });
