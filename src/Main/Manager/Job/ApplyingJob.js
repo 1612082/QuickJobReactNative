@@ -9,13 +9,11 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import JobCell from "../../../Common/JobCell/JobCell";
-import SyncStorage from "sync-storage";
 import axios from "../../../ultis/axios.default";
 // import CompanyPlaceholder from "./company.png";
 import { getImageSrc, prettierNumber } from "../../../helpers/helperFunctions";
 
-export default class Home extends Component {
+export default class ApplyingJob extends Component {
   constructor(props) {
     super(props);
     this.state = {
