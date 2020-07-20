@@ -3,7 +3,7 @@ import SyncStorage from "sync-storage";
 import { Alert } from "react-native";
 
 let axios = Axios.create({
-  baseURL: "http://192.168.100.4:8000/",
+  baseURL: "https://f2l-client.herokuapp.com/ ", // nếu chạy local thì baseURL sửa thành địa chỉ IP của máy mình
   headers: { "Content-Type": "application/json" },
 });
 
