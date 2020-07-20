@@ -14,6 +14,7 @@ import ButtonFormat from "../../Common/Button";
 import { ProgressSteps, ProgressStep } from "react-native-progress-steps";
 import RNPickerSelect from "react-native-picker-select";
 import axios from "../../ultis/axios.default";
+import { prettierDate } from "../../helpers/helperFunctions";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class Signup extends Component {
     this.state = {
       account: {
         fullname: "",
-        dob: new Date(),
+        dob: null,
         email: "",
         password: "",
         dial: "",
@@ -42,32 +43,32 @@ export default class Signup extends Component {
     this.setState({ isShow: true });
   }
   onGoToStepTwo() {
-    let { account } = this.state;
-    //Kiem tra nhap gia tri chua
-    if (account.email == "") {
-      this.setState({ errors: true, message: "Vui lòng nhập email" });
-    } else if (account.fullname == "") {
-      this.setState({ errors: true, message: "Vui lòng nhập tên người dùng" });
-    } else if (account.dial == "") {
-      this.setState({ errors: true, message: "Vui lòng nhập số điện thoại" });
-    } else if (account.address == "") {
-      this.setState({ errors: true, message: "Vui lòng nhập địa chỉ" });
-    } else {
-      //Kiem tra dinh dang email
-      let lastAtPos = account.email.lastIndexOf("@");
-      let lastDotPos = account.email.lastIndexOf(".");
-      if (
-        !(
-          lastAtPos < lastDotPos &&
-          lastAtPos > 0 &&
-          account.email.indexOf("@@") == -1 &&
-          lastDotPos > 2 &&
-          account.email.length - lastDotPos > 2
-        )
-      ) {
-        this.setState({ errors: true, message: "Email không đúng định dạng" });
-      } else this.setState({ errors: false, message: "" });
-    }
+    // let { account } = this.state;
+    // //Kiem tra nhap gia tri chua
+    // if (account.email == "") {
+    //   this.setState({ errors: true, message: "Vui lòng nhập email" });
+    // } else if (account.fullname == "") {
+    //   this.setState({ errors: true, message: "Vui lòng nhập tên người dùng" });
+    // } else if (account.dial == "") {
+    //   this.setState({ errors: true, message: "Vui lòng nhập số điện thoại" });
+    // } else if (account.address == "") {
+    //   this.setState({ errors: true, message: "Vui lòng nhập địa chỉ" });
+    // } else {
+    //   //Kiem tra dinh dang email
+    //   let lastAtPos = account.email.lastIndexOf("@");
+    //   let lastDotPos = account.email.lastIndexOf(".");
+    //   if (
+    //     !(
+    //       lastAtPos < lastDotPos &&
+    //       lastAtPos > 0 &&
+    //       account.email.indexOf("@@") == -1 &&
+    //       lastDotPos > 2 &&
+    //       account.email.length - lastDotPos > 2
+    //     )
+    //   ) {
+    //     this.setState({ errors: true, message: "Email không đúng định dạng" });
+    //   } else this.setState({ errors: false, message: "" });
+    // }
   }
 
   onRegister() {
@@ -200,7 +201,7 @@ export default class Signup extends Component {
             </KeyboardAvoidingView>
           </View>
         </ProgressStep>
-        {/* <ProgressStep
+        <ProgressStep
           label="Bước 2"
           nextBtnText="Tiếp theo"
           previousBtnText="Trở về"
@@ -208,7 +209,11 @@ export default class Signup extends Component {
           <View style={styles.container}>
             <KeyboardAvoidingView behavior="position">
               <ButtonFormat
-                content={"CHỌN NGÀY SINH"}
+                content={
+                  this.state.account.dob
+                    ? prettierDate(this.state.account.dob)
+                    : "CHỌN NGÀY SINH"
+                }
                 TouchInside={() => this.SelectDoB()}
               ></ButtonFormat>
               {this.state.isShow ? (
@@ -241,9 +246,11 @@ export default class Signup extends Component {
                   }}
                   onChange={(date) => {
                     let { account } = this.state;
+                    let tempDate = new Date(date.nativeEvent.timestamp);
+                    console.log(account);
                     account = {
                       ...account,
-                      dob: date,
+                      dob: tempDate,
                     };
                     this.setState({
                       account: account,
@@ -264,21 +271,19 @@ export default class Signup extends Component {
                     ...account,
                     gender: itemValue == "1" ? 1 : 0,
                   };
-                  console.log(account);
                   this.setState({
                     account: account,
                   });
                 }}
               >
-                {" "}
                 <Picker.Item label="Nam" value="1" />
                 <Picker.Item label="Nữ" value="0" />
               </Picker>
             </KeyboardAvoidingView>
           </View>
-        </ProgressStep> */}
+        </ProgressStep>
         <ProgressStep
-          label="Bước 2"
+          label="Bước 3"
           finishBtnText="Đăng ký"
           previousBtnText="Trở về"
           onSubmit={this.onRegister}
