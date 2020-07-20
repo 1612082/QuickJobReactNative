@@ -39,7 +39,9 @@ export default class Signup extends Component {
     this.onRegister = this.onRegister.bind(this);
   }
   SelectDoB() {
-    this.setState({ isShow: true });
+    this.setState({ isShow: !this.state.isShow }, () => {
+      console.log(this.state);
+    });
   }
   onGoToStepTwo() {
     // let { account } = this.state;
@@ -209,9 +211,11 @@ export default class Signup extends Component {
             <KeyboardAvoidingView behavior="position">
               <ButtonFormat
                 content={"CHỌN NGÀY SINH"}
-                TouchInside={() => this.SelectDoB()}
+                TouchInside={this.SelectDoB}
               ></ButtonFormat>
-              {this.state.isShow ? (
+              {(
+                this.state.isShow === true
+                ? 
                 <DateTimePicker
                   style={{
                     width: 200,
@@ -240,10 +244,11 @@ export default class Signup extends Component {
                     // ... You can check the source to find the other keys.
                   }}
                   onChange={(date) => {
-                    let { account } = this.state;
+                    let { account } = this.state;          
+                    let tempDate = new Date(date.nativeEvent.timestamp);
                     account = {
                       ...account,
-                      dob: date,
+                      dob: tempDate,
                     };
                     this.setState({
                       account: account,
@@ -251,7 +256,7 @@ export default class Signup extends Component {
                     });
                   }}
                 />
-              ) : (
+               : 
                 <></>
               )}
               {/* <Text style={styles.text}>Chọn giới tính</Text> */}
@@ -271,7 +276,6 @@ export default class Signup extends Component {
                   });
                 }}
               >
-                {" "}
                 <Picker.Item label="Nam" value="1" />
                 <Picker.Item label="Nữ" value="0" />
               </Picker>
